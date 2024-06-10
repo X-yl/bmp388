@@ -412,9 +412,8 @@ impl<I2C: ehal::i2c::I2c> BMP388<I2C, Blocking> {
     }
 
     fn write_byte(&mut self, reg: Register, byte: u8) -> Result<(), I2C::Error> {
-        let mut buffer = [0];
         self.com
-            .write_read(self.addr, &[reg as u8, byte], &mut buffer)
+            .write(self.addr, &[reg as u8, byte])
     }
 
     fn read_byte(&mut self, reg: Register) -> Result<u8, I2C::Error> {
